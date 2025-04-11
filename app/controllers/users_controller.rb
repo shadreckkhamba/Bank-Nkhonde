@@ -77,9 +77,12 @@ class UsersController < ApplicationController
 
   # Strong parameters for user creation and updates
   def user_params
-    params.require(:user).permit(
-      :name, :email, :phone, :gender, :role,
-      :password, :password_confirmation, :group_id
-    )
+    permitted = [:name, :email, :phone, :gender, :role, :password, :password_confirmation, :group_id]
+  
+    if request.patch?
+      params.require(:user).permit(permitted)
+    else
+      params.require(:user).permit(permitted)
+    end
   end
 end

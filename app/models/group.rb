@@ -1,7 +1,11 @@
 class Group < ApplicationRecord
-    has_many :memberships
+    has_many :memberships, dependent: :destroy
+    has_many :contributions, dependent: :destroy
     has_many :users, through: :memberships
-    has_many :contributions
-    has_many :transactions  # Assuming there's a Transaction model
-    has_many :histories     # Assuming there's a History model (if these are the names of your models)
+    has_many :transactions, dependent: :destroy
+    has_many :histories, dependent: :destroy
+
+
+    validates :name, presence: true
+    validates :join_code, presence: true, uniqueness: true
   end  
