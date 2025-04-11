@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_10_120229) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_10_142353) do
   create_table "contributions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
@@ -83,7 +83,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_10_120229) do
   add_foreign_key "histories", "groups"
   add_foreign_key "histories", "users"
   add_foreign_key "memberships", "groups"
-  add_foreign_key "memberships", "users"
+  add_foreign_key "memberships", "users", on_delete: :cascade
   add_foreign_key "transactions", "groups"
   add_foreign_key "transactions", "users"
 end
