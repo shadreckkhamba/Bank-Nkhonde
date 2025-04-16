@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_10_142353) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_14_122828) do
   create_table "contributions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "group_id", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_10_142353) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "join_code", null: false
+    t.integer "admin_id"
     t.index ["join_code"], name: "index_groups_on_join_code", unique: true
   end
 
@@ -67,7 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_10_142353) do
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "name"
+    t.string "username"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

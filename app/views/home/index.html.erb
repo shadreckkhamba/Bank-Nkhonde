@@ -1,0 +1,7 @@
+<h1>Home</h1>
+
+<% if @user %>
+  <p>Logged in as: <strong><%= @user.username %></strong></p>
+<% else %>
+  <p>You're not logged in.</p>
+<% end %>

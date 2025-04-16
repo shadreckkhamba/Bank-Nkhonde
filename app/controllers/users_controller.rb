@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  include AuthorizeRequest
+  skip_before_action :authorize_request, only: [:create]
   skip_before_action :verify_authenticity_token, only: [:create]
-
+  before_action :set_user, only: [:show, :update, :destroy]
+  
   # POST /users
   def create
     join_code = params[:join_code]
@@ -13,7 +15,7 @@ class UsersController < ApplicationController
     end
     
     @user = User.new(user_params)
-    @user.group_id = group.id # Ensure the group_id is set here
+    @user.group_id = group.id
     
     if @user.save
       render json: @user, status: :created, location: @user
@@ -26,15 +28,11 @@ class UsersController < ApplicationController
   # GET /users
   def index
     if params[:join_code]
-      # Only if join_code is provided, filter by group
       group = Group.find_by(join_code: params[:join_code])
-      
       unless group
         render json: { error: "Invalid join code" }, status: :unprocessable_entity
         return
       end
-
-      # Fetch users for the specified group
       @users = group.users
     else
       @users = User.all
@@ -50,6 +48,7 @@ class UsersController < ApplicationController
 
   # PUT /users/:id
   def update
+    authorize_group_admin!
     if @user.update(user_params)
       render json: @user
     else
@@ -59,6 +58,7 @@ class UsersController < ApplicationController
 
   # DELETE /users/:id
   def destroy
+    authorize_group_admin!
     if @user.destroy
       head :no_content
     else
@@ -68,21 +68,21 @@ class UsersController < ApplicationController
 
   private
 
-  # Set the user by ID
   def set_user
     @user = User.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     render json: { error: 'User not found' }, status: :not_found
   end
 
-  # Strong parameters for user creation and updates
   def user_params
     permitted = [:name, :email, :phone, :gender, :role, :password, :password_confirmation, :group_id]
-  
-    if request.patch?
-      params.require(:user).permit(permitted)
-    else
-      params.require(:user).permit(permitted)
+    params.require(:user).permit(permitted)
+  end
+
+  def authorize_group_admin!
+    group = @user.group
+    unless group && @current_user.id == group.admin_id
+      render json: { error: 'Only group admin can perform this action' }, status: :unauthorized
     end
   end
 end

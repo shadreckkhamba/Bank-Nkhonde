@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.0.0"
 gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.5", ">= 7.1.5.1"

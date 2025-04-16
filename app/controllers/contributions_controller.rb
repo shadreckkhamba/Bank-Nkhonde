@@ -1,5 +1,6 @@
 class ContributionsController < ApplicationController
     before_action :set_contribution, only: [:show, :update, :destroy]
+    include AuthorizeRequest
   
     # GET /contributions
     def index

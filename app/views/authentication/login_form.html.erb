@@ -1,0 +1,21 @@
+<h2>Login</h2>
+
+<%= form_with url: "/auth/login", method: :post, local: true do |f| %>
+  <div>
+    <label>Username:</label>
+    <%= text_field_tag "authentication[username]" %>
+  </div>
+
+  <div>
+    <label>Password:</label>
+    <%= password_field_tag "authentication[password]" %>
+  </div>
+
+  <div>
+    <%= submit_tag "Login" %>
+  </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <p style="color: red;"><%= flash[:alert] %></p>
+<% end %>
