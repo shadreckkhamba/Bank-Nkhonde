@@ -1,6 +1,43 @@
-<h1>Home</h1>
-<% if @user %>
-  <p>Logged in as: <strong><%= @user.username %></strong></p>
-<% else %>
-  <p>You're not logged in.</p>
-<% end %>
+<aside class="sidebar">
+  <div class="menu-item">
+    <span class="icon">➕</span>
+    <span>New Group</span>
+  </div>
+  <div class="menu-item">
+    <span class="icon">🏠</span>
+    <span>Home</span>
+  </div>
+  <div class="menu-item">
+    <span class="icon">👥</span>
+    <span>My Groups</span>
+  </div>
+  <div class="menu-item">
+    <span class="icon">📜</span>
+    <span>History</span>
+  </div>
+  <div class="menu-item">
+    <span class="icon">💳</span>
+    <span>Transactions</span>
+  </div>
+  <div class="menu-item">
+    <span class="icon">📊</span>
+    <span>Reports</span>
+  </div>
+  <div class="menu-item">
+    <span class="icon">🔔</span>
+    <span>Notifications</span>
+  </div>
+  <div class="menu-item">
+    <span class="icon">⚙️</span>
+    <span>Activities</span>
+  </div>
+  <div class="menu-item">
+    <span class="icon">🗑️</span>
+    <span>Trash</span>
+  </div>
+</aside>
+
+<section class="content">
+  <h1>Welcome, <%= @user ? @user.username : "Guest" %>!</h1>
+  <p>This is your Bank Nkhonde Group Management Account.</p>
+</section>

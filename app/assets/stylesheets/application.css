@@ -173,3 +173,157 @@ body, h1, p {
 .nav-button-link:hover {
   color: white;
 }
+
+
+
+/* Reset defaults. Side Bar*/
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+/* Layout wrapper */
+.main-layout {
+  display: flex;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar layout */
+.sidebar {
+  width: 220px;
+  background-color: #11111b;
+  color: white;
+  padding: 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Common menu item style */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Floating effect just for the first menu-item (+ New) */
+.menu-item:first-child {
+  background-color: #25252b;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s ease, background-color 0.2s;
+}
+
+.menu-item:first-child:hover {
+  background-color: #25253d;
+  transform: translateY(-2px);
+}
+
+.menu-item:hover {
+  background-color: #1f1f2b;
+}
+
+/* Icon size */
+.icon {
+  font-size: 1.2rem;
+  color: white;
+  transition: color 0.3s;
+}
+
+/* Main content */
+.content {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* Floating New Button */
+.new-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #11111b;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  font-size: 2rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s;
+}
+
+.new-button:hover {
+  background-color: #1f1f2b;
+}
+
+/* Search bar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.navbar .logo {
+  flex-shrink: 0;
+}
+
+.navbar-search {
+  position: relative;
+  flex-grow: 1;
+  max-width: 400px;
+  margin: 0 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 2.5rem;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  background-color: #212c33;
+  caret-color: #ffffff;
+  color: #ffffff;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #d6d6d6;
+  pointer-events: none;
+
+}
+
+.filter-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #d6d6d6;
+  cursor: pointer;
+}

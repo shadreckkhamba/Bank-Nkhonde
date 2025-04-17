@@ -85,4 +85,5 @@ class UsersController < ApplicationController
       render json: { error: 'Only group admin can perform this action' }, status: :unauthorized
     end
   end
+
 end
