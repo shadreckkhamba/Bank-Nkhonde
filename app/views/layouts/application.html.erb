@@ -1,16 +1,45 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>BankNkhonde</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Bank Nkhonde</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+  <%= stylesheet_link_tag "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_importmap_tags %>
+</head>
 
-  <body>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <%= link_to "Bank Nkhonde", root_path %>
+      </div>
+      <div class="nav-links">
+        <%= link_to "About", "#" %>
+
+        <% if @user %>
+          <div class="profile-dropdown">
+            <button id="profile-button" class="nav-button-link">
+              <%= @user.username %> <span class="caret">▼</span>
+            </button>
+            <div id="dropdown-menu" class="dropdown-content">
+              <%= link_to "Profile", "#" %>
+              <%= form_tag(logout_path, method: :delete) do %>
+                <%= submit_tag "Logout", class: "logout-link" %>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <%= link_to "Login", login_path %>
+        <% end %>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
     <%= yield %>
-  </body>
+  </main>
+</body>
 </html>

@@ -1,6 +1,6 @@
 class AuthenticationController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:login, :register]
-  skip_before_action :authorize_request, only: [:login, :login_form, :register, :register_form]
+  skip_before_action :authorize_request, only: [:login, :login_form, :register, :register_form, :logout]
 
   def login_form
     render :login_form
@@ -98,7 +98,12 @@ class AuthenticationController < ApplicationController
       end
     end
   end
-
+  
+  def logout
+    session[:user_id] = nil
+    redirect_to root_path, notice: "You have logged out successfully."
+  end
+  
   private
 
   def encode_token(payload)
